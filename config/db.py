@@ -10,6 +10,12 @@ db_database = os.getenv("db_database")
 db_username = os.getenv("db_username")
 db_password = os.getenv("db_password")
 
+print(f"port::{db_port}")
+print(f"host::{db_host}")
+print(f"database::{db_database}")
+print(f"username::{db_username}")
+print(f"password::{db_password}")
+
 try:
     engine = create_engine(
         url="postgresql://{0}:{1}@{2}:{3}/{4}".format(
