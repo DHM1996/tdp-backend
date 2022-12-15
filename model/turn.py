@@ -1,6 +1,6 @@
 from . import Base
-from sqlalchemy import Integer, Column, Date, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Integer, Column, Date
+
 
 class Turn(Base):
     __tablename__ = "turns"

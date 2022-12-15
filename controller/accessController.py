@@ -3,6 +3,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from config.user import get_user, create_user
 
+
 def register(user: UserLoginSchema, db: Session):
     user_db = get_user(user.username, db)
 
@@ -11,6 +12,7 @@ def register(user: UserLoginSchema, db: Session):
 
     return create_user(user, db)
 
+
 def login(user: UserLoginSchema, db: Session):
     user_db = get_user(user.username, db)
 
@@ -18,5 +20,3 @@ def login(user: UserLoginSchema, db: Session):
         raise HTTPException(status_code=401, detail="Username or password incorrect.")
 
     return "OK"
-
-

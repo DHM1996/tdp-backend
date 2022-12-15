@@ -11,9 +11,11 @@ access = APIRouter()
 user.Base.metadata.create_all(bind=engine)
 turn.Base.metadata.create_all(bind=engine)
 
+
 @access.post("/register/", status_code=200)
 def register(user: UserLoginSchema, db: Session = Depends(get_db)):
     return accessController.register(user, db)
+
 
 @access.post("/login/", status_code=200)
 def login(user: UserLoginSchema, db: Session = Depends(get_db)):
