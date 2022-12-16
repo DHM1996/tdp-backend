@@ -6,7 +6,8 @@ from validator.validator import validate_user, validate_profession
 
 def update_profile(profile: ProfileSchema):
     validate_user(profile.user_id)
-    validate_profession(profile.profession_id)
+    if profile.profession_id:
+        validate_profession(profile.profession_id)
     user_dao.update_profile(profile)
     return {"message": "user profile updated successfully"}
 

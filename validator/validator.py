@@ -4,8 +4,9 @@ from db.dao import \
     user as user_dao, \
     professions as professions_dao, \
     appointments as appointments_dao, \
-    works as works_dao,\
-    ratings as ratings_dao
+    works as works_dao, \
+    ratings as ratings_dao, \
+    professionals as professionals_dao
 
 from db.model.appointments import Appointment
 from db.model.users import User
@@ -88,3 +89,25 @@ def validate_rating(rating: RatingSchema):
         raise HTTPException(status_code=400, detail="A rating is already created for this work")
     if rating.rating < 0 or rating.rating > 5:
         raise HTTPException(status_code=400, detail="The raiting must be between 0 and 5")
+
+
+def validate_professionals_filters(professional_id, profession_id, user_longitude,
+                                   user_latitude, dist):
+    if not professional_id and not profession_id:
+        raise HTTPException(status_code=400, detail="The profession in missing")
+
+    if user_longitude and user_latitude and not dist:
+        raise HTTPException(status_code=400, detail="The distance is missing")
+
+    if user_latitude and not user_longitude:
+        raise HTTPException(status_code=400, detail="The longitude is missing")
+
+    if user_longitude and not user_latitude:
+        raise HTTPException(status_code=400, detail="The latitude is missing")
+
+
+def validate_professional(professional_id):
+    professional = professionals_dao.get_professional(professional_id)
+    if not professional:
+        raise HTTPException(status_code=400, detail="The user does not exist or is not a professional")
+    return professional

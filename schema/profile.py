@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class ProfileSchema(BaseModel):
@@ -6,6 +7,6 @@ class ProfileSchema(BaseModel):
     name: str
     surname: str
     link_pic: str
-    longitude: str
-    latitude: str
-    profession_id: int
+    longitude: int
+    latitude: int
+    profession_id: Optional[int]

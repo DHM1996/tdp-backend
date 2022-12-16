@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from routes.appointments import appointments_router
+from routes.professional import professional_router
 from routes.professions import professions_router
 from routes.profile import profile_router
 from routes.ratings import rating_router
@@ -30,3 +31,4 @@ app.include_router(appointments_router)
 app.include_router(professions_router)
 app.include_router(work_router)
 app.include_router(rating_router)
+app.include_router(professional_router)
