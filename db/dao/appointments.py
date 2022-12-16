@@ -4,13 +4,13 @@ from schema.appointments import NewAppointmentSchema, UpdateAppointmentSchema
 
 
 def create_appointment(appointment: NewAppointmentSchema):
-    appointment_db = Appointment(user_id=appointment.user_id,
+    db_appointment = Appointment(user_id=appointment.user_id,
                                  professional_id=appointment.professional_id,
                                  date=appointment.date,
                                  active=True)
-    db_session.add(appointment_db)
+    db_session.add(db_appointment)
     db_session.commit()
-    db_session.refresh(appointment_db)
+    db_session.refresh(db_appointment)
 
 
 def get_appointment(appointment_id):

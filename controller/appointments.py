@@ -1,10 +1,10 @@
 from schema.appointments import NewAppointmentSchema, UpdateAppointmentSchema
-from utils.validator import validate_appointment, validate_appointment_update, validate_user
+from validator.validator import validate_new_appointment, validate_appointment_update, validate_user
 import db.dao.appointments as appointments_dao
 
 
 def create_appointment(appointment: NewAppointmentSchema):
-    validate_appointment(appointment)
+    validate_new_appointment(appointment)
     appointments_dao.create_appointment(appointment)
     return {"message": "The appointment was created successfully"}
 
