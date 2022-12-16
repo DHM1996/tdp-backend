@@ -16,16 +16,16 @@ def get_user_by_id(user_id: int):
 
 def create_user(user: AccessSchema):
     try:
-        user_db = User(username=user.username, password=user.password)
-        db_session.add(user_db)
+        dn_user = User(username=user.username, password=user.password)
+        db_session.add(dn_user)
         db_session.commit()
-        db_session.refresh(user_db)
+        db_session.refresh(dn_user)
 
     except IntegrityError as err:
         db_session.rollback()
         raise err
 
-    return user_db.id
+    return dn_user.id
 
 
 def update_profile(profile: ProfileSchema):

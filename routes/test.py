@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-test = APIRouter()
+test_router = APIRouter()
 
 
-@test.get("/test", status_code=200)
-def request_turn():
+@test_router.get("/test", status_code=200)
+def test():
     return "ok"

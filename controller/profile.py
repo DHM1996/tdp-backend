@@ -1,7 +1,7 @@
 from db.dao import user as user_dao
 from schema.profile import ProfileSchema
 from db.model.users import User
-from utils.validator import validate_user, validate_profession
+from validator.validator import validate_user, validate_profession
 
 
 def update_profile(profile: ProfileSchema):
