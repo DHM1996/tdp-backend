@@ -1,18 +1,18 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
+
+
+from schema.access import AccessSchema
 import controller.access as controller
 
-from sqlalchemy.orm import Session
-
-from schema.user import LoginSchema
-
-access = APIRouter()
+access_router = APIRouter()
 
 
-@access.post("/register/", status_code=200)
-def register(user: LoginSchema):
+@access_router.post("/register/", status_code=200)
+def register(user: AccessSchema):
     return controller.register(user)
 
 
-@access.post("/login/", status_code=200)
-def login(user: LoginSchema):
+@access_router.post("/login/", status_code=200)
+def login(user: AccessSchema):
     return controller.login(user)
+

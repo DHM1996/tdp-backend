@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+
+from routes.appointments import appointments_router
+from routes.professions import professions_router
+from routes.profile import profile_router
 from routes.test import test
-from routes.access import access
+from routes.access import access_router
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -17,4 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(test)
-app.include_router(access)
+app.include_router(access_router)
+app.include_router(profile_router)
+app.include_router(appointments_router)
+app.include_router(professions_router)
