@@ -1,5 +1,5 @@
 from . import Base
-from sqlalchemy import Integer, String, Column, Boolean, ForeignKey
+from sqlalchemy import Integer, String, Column, Boolean, ForeignKey, Numeric
 
 
 class User(Base):
@@ -10,6 +10,6 @@ class User(Base):
     name = Column(String)
     surname = Column(String)
     link_pic = Column(String)
-    longitude = Column(String)
-    latitude = Column(String)
-    profession_id = Column(Integer, ForeignKey("professions.py.id"))
+    longitude = Column(Numeric)
+    latitude = Column(Numeric)
+    profession_id = Column(Integer, ForeignKey("professions.id"))

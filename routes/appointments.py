@@ -7,7 +7,7 @@ appointments_router = APIRouter()
 
 
 @appointments_router.post("/appointments/", status_code=200)
-def register(appointment: NewAppointmentSchema):
+def create_appointment(appointment: NewAppointmentSchema):
     return controller.create_appointment(appointment)
 
 
