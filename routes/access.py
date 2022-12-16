@@ -1,22 +1,18 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from schema.user import *
-from config.db import get_db, engine
-from controller import accessController
-from model import user
-from model import turn
-
-access = APIRouter()
-
-user.Base.metadata.create_all(bind=engine)
-turn.Base.metadata.create_all(bind=engine)
+from fastapi import APIRouter
 
 
-@access.post("/register/", status_code=200)
-def register(user: UserLoginSchema, db: Session = Depends(get_db)):
-    return accessController.register(user, db)
+from schema.access import AccessSchema
+import controller.access as controller
+
+access_router = APIRouter()
 
 
-@access.post("/login/", status_code=200)
-def login(user: UserLoginSchema, db: Session = Depends(get_db)):
-    return accessController.login(user, db)
+@access_router.post("/register/", status_code=200)
+def register(user: AccessSchema):
+    return controller.register(user)
+
+
+@access_router.post("/login/", status_code=200)
+def login(user: AccessSchema):
+    return controller.login(user)
+

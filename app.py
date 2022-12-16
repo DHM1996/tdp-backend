@@ -1,8 +1,11 @@
 from fastapi import FastAPI
-from routes.access import access
+
+from routes.appointments import appointments_router
+from routes.professions import professions_router
+from routes.profile import profile_router
 from routes.test import test
-from routes.user import user
-from routes.turn import turn
+from routes.access import access_router
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -17,7 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(access)
-app.include_router(user)
-app.include_router(turn)
 app.include_router(test)
+app.include_router(access_router)
+app.include_router(profile_router)
+app.include_router(appointments_router)
+app.include_router(professions_router)
