@@ -1,6 +1,4 @@
-from fastapi import HTTPException
-
-from validator.validator import validate_distance_filters, validate_professional
+from validator.validator import validate_distance_filters
 from math import sqrt
 import db.dao.professionals as professionals_dao
 
