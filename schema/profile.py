@@ -5,7 +5,6 @@ from typing import Optional
 class ProfileSchema(BaseModel):
     user_id: int
     name: str
-    surname: str
     link_pic: str
     longitude: int
     latitude: int

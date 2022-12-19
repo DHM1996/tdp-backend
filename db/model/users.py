@@ -8,7 +8,6 @@ class User(Base):
     username = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     name = Column(String)
-    surname = Column(String)
     link_pic = Column(String)
     longitude = Column(Numeric)
     latitude = Column(Numeric)

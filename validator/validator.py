@@ -91,10 +91,7 @@ def validate_rating(rating: RatingSchema):
         raise HTTPException(status_code=400, detail="The raiting must be between 0 and 5")
 
 
-def validate_professionals_filters(professional_id, profession_id, user_longitude,
-                                   user_latitude, dist):
-    if not professional_id and not profession_id:
-        raise HTTPException(status_code=400, detail="The profession in missing")
+def validate_distance_filters(user_longitude,user_latitude, dist):
 
     if user_longitude and user_latitude and not dist:
         raise HTTPException(status_code=400, detail="The distance is missing")
@@ -107,7 +104,7 @@ def validate_professionals_filters(professional_id, profession_id, user_longitud
 
 
 def validate_professional(professional_id):
-    professional = professionals_dao.get_professional(professional_id)
+    professional = professionals_dao.get_professional_by_id(professional_id)
     if not professional:
         raise HTTPException(status_code=400, detail="The user does not exist or is not a professional")
     return professional

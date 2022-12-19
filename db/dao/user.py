@@ -21,7 +21,7 @@ def create_user(user: AccessSchema):
         db_session.commit()
         db_session.refresh(dn_user)
 
-    except IntegrityError as err:
+    except Exception as err:
         db_session.rollback()
         raise err
 
@@ -29,14 +29,18 @@ def create_user(user: AccessSchema):
 
 
 def update_profile(profile: ProfileSchema):
-    db_session.query(User).filter(User.id == profile.user_id).update(
-        {
-            User.name: profile.name,
-            User.surname: profile.surname,
-            User.link_pic: profile.link_pic,
-            User.longitude: profile.longitude,
-            User.latitude: profile.latitude,
-            User.profession_id: profile.profession_id
-        }
-    )
-    db_session.commit()
+    try:
+        db_session.query(User).filter(User.id == profile.user_id).update(
+            {
+                User.name: profile.name,
+                User.link_pic: profile.link_pic,
+                User.longitude: profile.longitude,
+                User.latitude: profile.latitude,
+                User.profession_id: profile.profession_id
+            }
+        )
+        db_session.commit()
+
+    except Exception as err:
+        db_session.rollback()
+        raise err
