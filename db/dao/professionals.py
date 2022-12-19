@@ -1,3 +1,5 @@
+from sqlalchemy import func
+
 from db import db_session
 from db.model.users import User
 
@@ -21,7 +23,7 @@ def get_professional_by_id(professional_id):
 
 def get_professional_by_name(professional_name, profession_id=None):
     try:
-        query = db_session.query(User).filter(User.name.like(f'%{professional_name}%'))
+        query = db_session.query(User).filter(func.lower(User.name).like(f'%{professional_name.lower()}%'))
         if profession_id:
             query = query.filter(User.profession_id == profession_id)
         else:
