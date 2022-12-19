@@ -4,33 +4,53 @@ from schema.appointments import NewAppointmentSchema, UpdateAppointmentSchema
 
 
 def create_appointment(appointment: NewAppointmentSchema):
-    db_appointment = Appointment(user_id=appointment.user_id,
-                                 professional_id=appointment.professional_id,
-                                 date=appointment.date,
-                                 active=True)
-    db_session.add(db_appointment)
-    db_session.commit()
-    db_session.refresh(db_appointment)
+    try:
+        db_appointment = Appointment(user_id=appointment.user_id,
+                                     professional_id=appointment.professional_id,
+                                     date=appointment.date,
+                                     active=True)
+        db_session.add(db_appointment)
+        db_session.commit()
+        db_session.refresh(db_appointment)
+    except Exception as err:
+        db_session.rollback()
+        raise err
 
 
 def get_appointment(appointment_id):
-    appointment = db_session.query(Appointment).filter(Appointment.id == appointment_id).first()
-    return appointment
+    try:
+        appointment = db_session.query(Appointment).filter(Appointment.id == appointment_id).first()
+        return appointment
+    except Exception as err:
+        db_session.rollback()
+        raise err
 
 
 def update_appointment(appointment_update: UpdateAppointmentSchema):
-    db_session.query(Appointment).filter(Appointment.id == appointment_update.appointment_id).update(
-        {
-            Appointment.date: appointment_update.date,
-            Appointment.active: appointment_update.active
-        }
-    )
-    db_session.commit()
+    try:
+        db_session.query(Appointment).filter(Appointment.id == appointment_update.appointment_id).update(
+            {
+                Appointment.date: appointment_update.date,
+                Appointment.active: appointment_update.active
+            }
+        )
+        db_session.commit()
+    except Exception as err:
+        db_session.rollback()
+        raise err
 
 
 def get_user_appointments(user_id):
-    return db_session.query(Appointment).filter(Appointment.user_id == user_id).all()
+    try:
+        return db_session.query(Appointment).filter(Appointment.user_id == user_id).all()
+    except Exception as err:
+        db_session.rollback()
+        raise err
 
 
 def get_professional_appointments(professional_id):
-    return db_session.query(Appointment).filter(Appointment.professional_id == professional_id).all()
+    try:
+        return db_session.query(Appointment).filter(Appointment.professional_id == professional_id).all()
+    except Exception as err:
+        db_session.rollback()
+        raise err

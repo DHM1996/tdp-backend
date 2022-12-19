@@ -3,8 +3,16 @@ from db.model.professions import Profession
 
 
 def get_profession_by_id(profession_id):
-    return db_session.query(Profession.title).filter(Profession.id == profession_id).first()
+    try:
+        return db_session.query(Profession.title).filter(Profession.id == profession_id).first()
+    except Exception as err:
+        db_session.rollback()
+        raise err
 
 
 def get_professions():
-    return db_session.query(Profession).all()
+    try:
+        return db_session.query(Profession).all()
+    except Exception as err:
+        db_session.rollback()
+        raise err

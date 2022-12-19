@@ -17,7 +17,6 @@ def get_profile(user_id):
     profile = ProfileSchema(
                             user_id=db_user.id,
                             name=db_user.name,
-                            surname=db_user.surname,
                             link_pic=db_user.link_pic,
                             longitude=db_user.longitude,
                             latitude=db_user.latitude,

@@ -6,12 +6,14 @@ professional_router = APIRouter()
 
 @professional_router.get("/professionals", status_code=200)
 def get_professionals(professional_id=None,
+                      professional_name=None,
                       profession_id=None,
                       user_longitude=None,
                       user_latitude=None,
                       dist=None):
 
     return controller.get_professionals(professional_id,
+                                        professional_name,
                                         profession_id,
                                         user_longitude,
                                         user_latitude,
