@@ -101,10 +101,3 @@ def validate_distance_filters(user_longitude,user_latitude, dist):
 
     if user_longitude and not user_latitude:
         raise HTTPException(status_code=400, detail="The latitude is missing")
-
-
-def validate_professional(professional_id):
-    professional = professionals_dao.get_professional_by_id(professional_id)
-    if not professional:
-        raise HTTPException(status_code=400, detail="The user does not exist or is not a professional")
-    return professional
