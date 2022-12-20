@@ -13,6 +13,7 @@ def get_ratings_by_professional_id(professional_id):
     validate_user(professional_id)
     result = ratings_dao.get_ratings_by_professional_id(professional_id)
     ratings = []
+    total = 0
     for rating in result:
         ratings.append(
             GetRatingSchema(
@@ -22,4 +23,17 @@ def get_ratings_by_professional_id(professional_id):
                 comments=rating["Rating"].comments
             )
         )
-    return ratings
+        total += rating["Rating"].rating
+
+    cant = len(ratings)
+
+    if cant != 0:
+        mean = total / len(ratings)
+
+    else:
+        mean = 0
+
+    return {
+        "ratings": ratings,
+        "mean": mean
+    }
