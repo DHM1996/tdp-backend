@@ -19,7 +19,7 @@ def get_professionals(professional_id, professional_name, profession_id, user_lo
     validate_distance_filters(user_longitude, user_latitude, dist)
     professionals = professionals_dao.get_professionals_by_profession(profession_id)
 
-    if not user_longitude and not user_latitude and not dist:
+    if not user_longitude or not user_latitude or not dist:
         return {
             "professionals": professionals,
             "message": "No filters where included"
@@ -28,6 +28,9 @@ def get_professionals(professional_id, professional_name, profession_id, user_lo
     result = []
 
     for professional in professionals:
+        if not professional.longitude or not professional.latitude:
+            continue
+
         professional_dist = sqrt(
             (float(professional.longitude) - float(user_longitude)) ** 2 + (
                     float(professional.latitude) - float(user_latitude)) ** 2
@@ -37,6 +40,6 @@ def get_professionals(professional_id, professional_name, profession_id, user_lo
             result.append(professional)
 
     return {
-        "professionals": professionals,
+        "professionals":  result,
         "message": "Distance was used"
     }
