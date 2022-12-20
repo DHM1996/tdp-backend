@@ -7,25 +7,31 @@ from schema.profile import ProfileSchema
 
 
 def get_user_by_username(username: str):
-    return db_session.query(User).filter(User.username == username).first()
+    try:
+        return db_session.query(User).filter(User.username == username).first()
+
+    except Exception as err:
+        db_session.rollback()
 
 
 def get_user_by_id(user_id: int):
-    return db_session.query(User).filter(User.id == user_id).first()
+    try:
+        return db_session.query(User).filter(User.id == user_id).first()
+
+    except Exception as err:
+        db_session.rollback()
 
 
 def create_user(user: AccessSchema):
     try:
-        dn_user = User(username=user.username, password=user.password)
-        db_session.add(dn_user)
+        db_user = User(username=user.username, password=user.password)
+        db_session.add(db_user)
         db_session.commit()
-        db_session.refresh(dn_user)
+        db_session.refresh(db_user)
+        return db_user.id
 
     except Exception as err:
         db_session.rollback()
-        raise err
-
-    return dn_user.id
 
 
 def update_profile(profile: ProfileSchema):
@@ -43,4 +49,3 @@ def update_profile(profile: ProfileSchema):
 
     except Exception as err:
         db_session.rollback()
-        raise err

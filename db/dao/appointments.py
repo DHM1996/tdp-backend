@@ -14,7 +14,6 @@ def create_appointment(appointment: NewAppointmentSchema):
         db_session.refresh(db_appointment)
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_appointment(appointment_id):
@@ -23,7 +22,6 @@ def get_appointment(appointment_id):
         return appointment
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def update_appointment(appointment_update: UpdateAppointmentSchema):
@@ -37,7 +35,6 @@ def update_appointment(appointment_update: UpdateAppointmentSchema):
         db_session.commit()
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_user_appointments(user_id):
@@ -45,7 +42,6 @@ def get_user_appointments(user_id):
         return db_session.query(Appointment).filter(Appointment.user_id == user_id).all()
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_professional_appointments(professional_id):
@@ -53,4 +49,3 @@ def get_professional_appointments(professional_id):
         return db_session.query(Appointment).filter(Appointment.professional_id == professional_id).all()
     except Exception as err:
         db_session.rollback()
-        raise err

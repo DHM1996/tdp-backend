@@ -16,7 +16,6 @@ def get_professionals_by_profession(profession_id):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_professional_by_id(professional_id):
@@ -25,7 +24,6 @@ def get_professional_by_id(professional_id):
             User.id == professional_id).filter(User.profession_id != None).all()
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_professional_by_name(professional_name, profession_id=None):
@@ -38,4 +36,3 @@ def get_professional_by_name(professional_name, profession_id=None):
         return query.all()
     except Exception as err:
         db_session.rollback()
-        raise err

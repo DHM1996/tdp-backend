@@ -16,7 +16,6 @@ def create_rating(rating: RatingSchema):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_ratings_by_professional_id(professional_id):
@@ -26,7 +25,6 @@ def get_ratings_by_professional_id(professional_id):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_rating_by_work_id(work_id):
@@ -35,4 +33,3 @@ def get_rating_by_work_id(work_id):
 
     except Exception as err:
         db_session.rollback()
-        raise err

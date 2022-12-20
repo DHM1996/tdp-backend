@@ -16,7 +16,6 @@ def create_work(work: NewWorkSchema):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_work_by_appointment_id(appointment_id):
@@ -25,7 +24,6 @@ def get_work_by_appointment_id(appointment_id):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def get_work_by_work_id(work_id):
@@ -34,7 +32,6 @@ def get_work_by_work_id(work_id):
 
     except Exception as err:
         db_session.rollback()
-        raise err
 
 
 def update_work(work_update: UpdateWorkSchema):
@@ -51,4 +48,3 @@ def update_work(work_update: UpdateWorkSchema):
 
     except Exception as err:
         db_session.rollback()
-        raise err
