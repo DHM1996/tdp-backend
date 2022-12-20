@@ -1,17 +1,15 @@
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
 
+import validator.validator
 from db.dao import user as user_dao
 from db.model.users import User
 from schema.access import AccessSchema
 
 
 def register(user: AccessSchema):
-    try:
-        user_id = user_dao.create_user(user)
-
-    except IntegrityError:
-        raise HTTPException(status_code=401, detail="User already exist.")
+    validator.validator.check_if_user_exists(user.username)
+    user_id = user_dao.create_user(user)
 
     return {"user_id": user_id}
 

@@ -24,6 +24,12 @@ def validate_user(user_id):
     return db_user
 
 
+def check_if_user_exists(username):
+    db_user: User = user_dao.get_user_by_username(username)
+    if db_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+
+
 def validate_profession(profession_id):
     profession = professions_dao.get_profession_by_id(profession_id)
     if not profession:
@@ -91,8 +97,7 @@ def validate_rating(rating: RatingSchema):
         raise HTTPException(status_code=400, detail="The raiting must be between 0 and 5")
 
 
-def validate_distance_filters(user_longitude,user_latitude, dist):
-
+def validate_distance_filters(user_longitude, user_latitude, dist):
     if user_longitude and user_latitude and not dist:
         raise HTTPException(status_code=400, detail="The distance is missing")
 
