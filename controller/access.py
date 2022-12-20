@@ -1,5 +1,4 @@
 from fastapi import HTTPException
-from sqlalchemy.exc import IntegrityError
 
 import validator.validator
 from db.dao import user as user_dao
@@ -12,6 +11,12 @@ def register(user: AccessSchema):
     user_id = user_dao.create_user(user)
 
     return {"user_id": user_id}
+
+
+{
+    "username": "adriprueba",
+    "password": "string1"
+}
 
 
 def login(user: AccessSchema):
