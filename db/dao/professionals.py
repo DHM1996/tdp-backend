@@ -6,7 +6,14 @@ from db.model.users import User
 
 def get_professionals_by_profession(profession_id):
     try:
-        return db_session.query(User).filter(User.profession_id == profession_id).all()
+        query = db_session.query(User)
+
+        if profession_id:
+            query = query.filter(User.profession_id == profession_id)
+        else:
+            query = query.filter(User.profession_id != None)
+        return query.all()
+
     except Exception as err:
         db_session.rollback()
         raise err
